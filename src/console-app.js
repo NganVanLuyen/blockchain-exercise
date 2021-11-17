@@ -12,7 +12,7 @@ function showCmd() {
     console.log('Accounts:\n\t5. createPrivateKey\t 6. createMultiplePrivateKey\t 7. createAccountWallet\n');
     console.log('Ask Trade:\n\t8. askTradeERC20ForETH\t 9. askTradeERC20ForERC721\t 10. askTradeETHForERC20\n\t11. askTradeETHForERC721\t 12. askTradeE721ForERC20\t 13. askTradeE721ForETH\n');
     console.log('Bid Token:\n\t14. bidTradeERC20ForETH\t 15. bidTradeERC20ForERC721\t 16. bidTradeETHForERC20\n\t17. bidTradeETHForERC721\t 18. bidTradeE721ForERC20\t 19. bidTradeE721ForETH');
-    console.log('Other:\n\t0. Exit\t00.Help');
+    console.log('\n\t0. Exit\t00.Help');
 }
 
 async function selectCase(option) {
@@ -28,7 +28,10 @@ async function selectCase(option) {
             showMenu();
             break;
         case '2':
-            await trade.getAskEvent();
+            console.log("E20: " + e20Address + " E721: " + e721Address + " ETH: " + ethAddress);
+            var TokenA = (readlineSync.question('TokenA: '));
+            var TokenB = (readlineSync.question('TokenB: '));
+            await trade.getAskEvent(TokenA, TokenB);
             showMenu();
             break;
         case '3':

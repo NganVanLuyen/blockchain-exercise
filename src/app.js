@@ -223,7 +223,7 @@ const getBalances = async () => {
     await web3.eth.getBalance(account.address).then(data => console.log("ETH1: " + web3.utils.fromWei(data, 'ether')));
     await e721Contract.methods.balanceOf(account.address).call().then(data => console.log("NFT: " + data));
     await e20Contract.methods.balanceOf(account.address).call().then(data => console.log("E20: " + web3.utils.fromWei(data, 'ether')));
-    await e721Contract.methods.ownerOf(4).call().then(data => console.log("NFT owner: " + data));
+    // await e721Contract.methods.ownerOf(4).call().then(data => console.log("NFT owner: " + data));
 }
 
 const getAskEvent = async (tokenA, tokenB) => {
@@ -234,8 +234,14 @@ const getAskEvent = async (tokenA, tokenB) => {
     })
         .then(events => {
             events.forEach(element => {
+                let amount;
+                if (element.returnValues.tokenA == e721Address) {
+                    amount = 1
+                } else {
+                    amount = web3.utils.fromWei(element.returnValues.amount, 'ether');
+                }
                 console.log("Id: " + element.returnValues.askId +
-                    "\t amount: " + web3.utils.fromWei(element.returnValues.amount, 'ether') +
+                    "\t amount: " + amount +
                     "\t priceOfPair: " + web3.utils.fromWei(element.returnValues.priceOfPair, 'ether'));
             });
         })
