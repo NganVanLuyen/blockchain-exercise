@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 import "./E20TK.sol";
 import "./E721TK.sol";
 
-contract TradeToken is E20TK, E721TK{
+contract TradeToken is E20TK {
     event NewAsk(
         uint256 indexed askId,
         address indexed tokenA,
